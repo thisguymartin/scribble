@@ -43,6 +43,21 @@ DISABLE_TELEMETRY=1 npx skills add ./research-artifacts --all -g
 - `tool-evaluation` - maintenance, license, adoption, cost, and stack-fit reviews.
 - `source-synthesis` - compact sourced summaries that separate facts from inference.
 
+## Recommended Companion Skill — caveman
+
+The three skills above reference the official [caveman](https://github.com/JuliusBrussee/caveman) skill for two things:
+
+- **Inter-agent handoffs** (`full` mode) — terse, fragment-OK prompts for the next agent. Cuts ~75% of inter-agent tokens.
+- **HTML artifact body copy** (`lite` mode) — plain English, no marketing voice, full sentences kept so humans read it cleanly.
+
+Install once globally so the references resolve:
+
+```bash
+npx skills add JuliusBrussee/caveman -g
+```
+
+The full upstream suite also ships `caveman-commit`, `caveman-review`, `caveman-compress`, `caveman-stats`, `cavecrew`, and a `SessionStart` hook for always-on activation in Claude Code. See upstream for install paths per agent.
+
 ## Optional Plugin Installs
 
 The repo also includes plugin metadata for Codex and Claude Code.

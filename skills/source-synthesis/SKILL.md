@@ -59,4 +59,4 @@ Use this structure when the result should feed Claude, Codex, design, or impleme
 3. Proposed flows or artifact sections.
 4. Pros, cons, risks, and assumptions.
 5. Open questions or resources needed.
-6. Next agent/task prompt.
+6. Next agent/task prompt — if the official [caveman](https://github.com/JuliusBrussee/caveman) skill is installed, write in caveman `full` mode (fragments OK, drop articles, imperatives only).

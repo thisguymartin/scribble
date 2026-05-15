@@ -69,3 +69,5 @@ End planning artifacts with a compact handoff section when implementation may fo
 - Source-backed facts.
 - Open questions or resources still needed.
 - Suggested first implementation task or next research prompt.
+
+If the official [caveman](https://github.com/JuliusBrussee/caveman) skill is installed, write handoff bullets in caveman `full` mode — fragments OK, drop articles, imperatives only, no hedging. Next agent reads this, not a human.

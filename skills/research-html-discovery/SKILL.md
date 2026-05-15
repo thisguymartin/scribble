@@ -62,4 +62,5 @@ Use this for sourced discovery and visual planning reports.
 - Use tables for comparisons and timelines.
 - Use diagrams for architecture, workflow, user journey, data flow, or decision maps when they clarify the problem.
 - Keep copy dense and scannable. Avoid marketing-style hero pages.
+- If the official [caveman](https://github.com/JuliusBrussee/caveman) skill is installed, write artifact body copy in caveman `lite` mode — drop filler and marketing voice, keep articles and full sentences so humans read it cleanly. Install: `npx skills add JuliusBrussee/caveman -g`.
 - Include a visible sources section with links or local file references.
