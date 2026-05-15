@@ -1,0 +1,31 @@
+{
+  "name": "research-artifacts",
+  "owner": {
+    "name": "Martin Patino",
+    "email": "mpatino117@gmail.com"
+  },
+  "description": "Personal research and discovery skills.",
+  "version": "0.1.0",
+  "plugins": [
+    {
+      "name": "research-artifacts",
+      "source": "./",
+      "description": "Research, source synthesis, tool evaluation, and HTML discovery workflows.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Martin Patino",
+        "email": "mpatino117@gmail.com"
+      },
+      "homepage": "https://github.com/mpatino117/research-artifacts",
+      "repository": "https://github.com/mpatino117/research-artifacts",
+      "license": "MIT",
+      "keywords": [
+        "research",
+        "skills",
+        "html",
+        "discovery"
+      ],
+      "category": "productivity"
+    }
+  ]
+}

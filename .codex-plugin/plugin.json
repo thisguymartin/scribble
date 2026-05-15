@@ -1,0 +1,40 @@
+{
+  "name": "research-artifacts",
+  "version": "0.1.0",
+  "description": "Research, source synthesis, tool evaluation, and HTML discovery workflows for agent sessions.",
+  "author": {
+    "name": "Martin Patino",
+    "email": "mpatino117@gmail.com"
+  },
+  "homepage": "https://github.com/mpatino117/research-artifacts",
+  "repository": "https://github.com/mpatino117/research-artifacts",
+  "license": "MIT",
+  "keywords": [
+    "research",
+    "skills",
+    "html",
+    "discovery",
+    "tool-evaluation",
+    "source-synthesis"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Research Artifacts",
+    "shortDescription": "Research workflows and HTML discovery artifacts",
+    "longDescription": "Use Research Artifacts for sourced research, tool evaluation, source synthesis, and single-file HTML discovery reports when plain chat is too flat.",
+    "developerName": "Martin Patino",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Research Artifacts to research this repo and make an HTML discovery report.",
+      "Evaluate these tools for my stack.",
+      "Synthesize these sources into a concise decision memo."
+    ],
+    "brandColor": "#0F766E",
+    "screenshots": []
+  }
+}
