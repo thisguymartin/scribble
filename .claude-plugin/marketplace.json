@@ -4,13 +4,13 @@
     "name": "Martin Patino",
     "email": "mpatino117@gmail.com"
   },
-  "description": "Personal research and discovery skills.",
+  "description": "Personal research and HTML artifact skills.",
   "version": "0.1.0",
   "plugins": [
     {
       "name": "scribble",
       "source": "./",
-      "description": "Research, source synthesis, tool evaluation, and HTML discovery workflows.",
+      "description": "Research, source synthesis, tool evaluation, and HTML artifact workflows.",
       "version": "0.1.0",
       "author": {
         "name": "Martin Patino",
@@ -23,6 +23,8 @@
         "research",
         "skills",
         "html",
+        "html-effectiveness",
+        "visual-artifacts",
         "discovery"
       ],
       "category": "productivity"
