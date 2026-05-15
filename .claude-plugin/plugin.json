@@ -1,6 +1,6 @@
 {
   "name": "scribble",
-  "description": "Research, source synthesis, tool evaluation, and HTML discovery workflows for agent sessions.",
+  "description": "Research, source synthesis, tool evaluation, and HTML artifact workflows for agent sessions.",
   "version": "0.1.0",
   "author": {
     "name": "Martin Patino",
@@ -13,6 +13,8 @@
     "research",
     "skills",
     "html",
+    "html-effectiveness",
+    "visual-artifacts",
     "discovery",
     "tool-evaluation",
     "source-synthesis"

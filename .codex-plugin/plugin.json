@@ -1,7 +1,7 @@
 {
   "name": "scribble",
   "version": "0.1.0",
-  "description": "Research, source synthesis, tool evaluation, and HTML discovery workflows for agent sessions.",
+  "description": "Research, source synthesis, tool evaluation, and HTML artifact workflows for agent sessions.",
   "author": {
     "name": "Martin Patino",
     "email": "mpatino117@gmail.com"
@@ -13,6 +13,8 @@
     "research",
     "skills",
     "html",
+    "html-effectiveness",
+    "visual-artifacts",
     "discovery",
     "tool-evaluation",
     "source-synthesis"
@@ -20,8 +22,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Scribble",
-    "shortDescription": "Research workflows and HTML discovery artifacts",
-    "longDescription": "Use Scribble for sourced research, tool evaluation, source synthesis, and single-file HTML discovery reports when plain chat is too flat.",
+    "shortDescription": "Research workflows and HTML artifacts",
+    "longDescription": "Use Scribble for sourced research, tool evaluation, source synthesis, and single-file HTML artifacts when plain chat or Markdown is too flat.",
     "developerName": "Martin Patino",
     "category": "Productivity",
     "capabilities": [
@@ -31,6 +33,7 @@
     ],
     "defaultPrompt": [
       "Use Scribble to research this repo and make an HTML discovery report.",
+      "Use HTML Effectiveness to turn this plan into a single-file artifact.",
       "Evaluate these tools for my stack.",
       "Synthesize these sources into a concise decision memo."
     ],
