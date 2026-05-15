@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>deploy-html setup builder</title>
+<style>
+  :root {
+    --bg: #0b0d10;
+    --panel: #14181d;
+    --panel-2: #1a1f26;
+    --line: #262d36;
+    --ink: #e6edf3;
+    --ink-dim: #8b96a3;
+    --accent: #7ee787;
+    --accent-2: #79c0ff;
+    --warn: #f0883e;
+    --bad: #ff7b72;
+    --code-bg: #0d1117;
+    --mono: ui-monospace, SFMono-Regular, "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+    --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.5; }
+  body { padding: 28px 24px 80px; max-width: 1280px; margin: 0 auto; }
+  header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 22px; }
+  h1 { font-size: 22px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+  h1 .sub { color: var(--ink-dim); font-weight: 400; font-size: 14px; margin-left: 8px; }
+  .lede { color: var(--ink-dim); font-size: 13px; margin: 6px 0 18px; }
+  .instruct { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent-2); padding: 10px 14px; border-radius: 6px; color: var(--ink-dim); font-size: 13px; margin-bottom: 22px; }
+  .instruct strong { color: var(--ink); }
+
+  .grid { display: grid; grid-template-columns: 360px 1fr; gap: 22px; }
+  @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
+
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px; }
+  .panel h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-dim); margin: 0 0 12px; font-weight: 600; }
+
+  label { display: block; font-size: 12px; color: var(--ink-dim); margin: 12px 0 4px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+  label:first-of-type { margin-top: 0; }
+  input[type="text"] {
+    width: 100%; background: var(--code-bg); border: 1px solid var(--line);
+    color: var(--ink); font-family: var(--mono); font-size: 13px;
+    padding: 9px 11px; border-radius: 5px; outline: none;
+    transition: border-color 120ms ease;
+  }
+  input[type="text"]:focus { border-color: var(--accent-2); }
+  .hint { font-size: 11px; color: var(--ink-dim); margin-top: 4px; font-family: var(--mono); }
+
+  .row { display: flex; gap: 8px; align-items: stretch; }
+  .row input { flex: 1; }
+  button {
+    background: var(--panel-2); border: 1px solid var(--line); color: var(--ink);
+    padding: 9px 14px; border-radius: 5px; font-family: var(--sans); font-size: 13px;
+    cursor: pointer; transition: background 120ms ease, border-color 120ms ease;
+    white-space: nowrap;
+  }
+  button:hover { background: var(--line); border-color: var(--ink-dim); }
+  button.primary { background: var(--accent); color: #0b0d10; border-color: var(--accent); font-weight: 600; }
+  button.primary:hover { background: #5ed26a; border-color: #5ed26a; }
+  button.ghost { background: transparent; }
+  button.tiny { padding: 5px 9px; font-size: 11px; }
+  button:active { transform: translateY(1px); }
+  button.copied { background: var(--accent-2) !important; color: #0b0d10 !important; border-color: var(--accent-2) !important; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .actions .spacer { flex: 1; }
+
+  .step-list { display: flex; flex-direction: column; gap: 14px; }
+  .step { background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .step-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--panel);
+  }
+  .step-head .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #0b0d10;
+    font-weight: 700; font-size: 12px; flex-shrink: 0;
+  }
+  .step-head .title { flex: 1; font-size: 13px; font-weight: 600; }
+  .step-head .meta { color: var(--ink-dim); font-size: 11px; font-family: var(--mono); }
+  .step pre { margin: 0; padding: 12px 14px; font-family: var(--mono); font-size: 12.5px; background: var(--code-bg); color: var(--ink); overflow-x: auto; white-space: pre; }
+  .step pre .c { color: var(--ink-dim); }
+  .step pre .k { color: var(--accent-2); }
+  .step pre .s { color: var(--accent); }
+  .step pre .w { color: var(--warn); }
+
+  .file-block { margin-bottom: 16px; }
+  .file-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 8px 12px; border: 1px solid var(--line); border-bottom: none;
+    background: var(--panel); border-radius: 6px 6px 0 0;
+  }
+  .file-head .path { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
+  .file-head .path strong { color: var(--ink); }
+  .file-block pre { margin: 0; padding: 14px; font-family: var(--mono); font-size: 12.5px; background: var(--code-bg); color: var(--ink); border: 1px solid var(--line); border-radius: 0 0 6px 6px; overflow-x: auto; white-space: pre; }
+
+  .arch {
+    background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px;
+    padding: 16px; font-family: var(--mono); font-size: 12px; color: var(--ink);
+    white-space: pre; overflow-x: auto; line-height: 1.45;
+  }
+  .arch .lbl { color: var(--accent); }
+  .arch .arrow { color: var(--warn); }
+  .arch .url { color: var(--accent-2); }
+
+  .pill { display: inline-block; padding: 2px 7px; border-radius: 10px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.03em; background: var(--panel-2); color: var(--ink-dim); border: 1px solid var(--line); }
+  .pill.live { background: rgba(126, 231, 135, 0.12); color: var(--accent); border-color: rgba(126, 231, 135, 0.3); }
+
+  footer { margin-top: 36px; color: var(--ink-dim); font-size: 11px; border-top: 1px solid var(--line); padding-top: 14px; text-align: center; }
+  footer code { font-family: var(--mono); background: var(--panel-2); padding: 1px 5px; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>deploy-html setup builder <span class="sub">/ Cloudflare Worker + D1 BLOB store</span></h1>
+  <span class="pill live">live preview</span>
+</header>
+
+<p class="lede">
+  One-time builder for the <code style="font-family:var(--mono)">/deploy-html</code> skill.
+  Fill in the inputs on the left; the commands and configs on the right update live and copy in one click.
+</p>
+
+<div class="instruct">
+  <strong>How to use:</strong> set <em>worker name</em> and <em>account subdomain</em> (from your Cloudflare dashboard URL), click <em>Generate token</em>, then walk through the 8 setup steps top-to-bottom. The final block is the <code style="font-family:var(--mono)">~/.scribble-deploy/config.json</code> you save to your home directory.
+</div>
+
+<div class="actions">
+  <button class="primary" id="copy-all">📋 Copy full setup (commands + config)</button>
+  <button id="copy-config">📋 Copy config.json only</button>
+  <button id="copy-wrangler">📋 Copy wrangler.toml</button>
+  <span class="spacer"></span>
+  <button class="ghost" id="reset">↺ Reset</button>
+</div>
+
+<div class="grid">
+
+  <!-- LEFT: inputs -->
+  <section class="panel">
+    <h2>Inputs</h2>
+
+    <label for="worker_name">Worker name</label>
+    <input type="text" id="worker_name" autocomplete="off" spellcheck="false">
+    <div class="hint">becomes <span id="hint-name">&lt;name&gt;</span>.&lt;account&gt;.workers.dev</div>
+
+    <label for="account_sub">Account subdomain</label>
+    <input type="text" id="account_sub" autocomplete="off" spellcheck="false" placeholder="e.g. yourname">
+    <div class="hint">find it at dash.cloudflare.com → Workers &amp; Pages → your subdomain</div>
+
+    <label for="db_name">D1 database name</label>
+    <input type="text" id="db_name" autocomplete="off" spellcheck="false">
+
+    <label for="token">Upload token <span style="color:var(--warn); text-transform:none; letter-spacing:0;">(secret)</span></label>
+    <div class="row">
+      <input type="text" id="token" autocomplete="off" spellcheck="false">
+      <button id="gen-token" title="Generate a 64-char hex token in your browser (crypto.getRandomValues)">↻ Generate</button>
+    </div>
+    <div class="hint">paste the same value into <code style="font-family:var(--mono)">wrangler secret put UPLOAD_TOKEN</code></div>
+
+    <hr style="border:none; border-top: 1px solid var(--line); margin: 22px 0 16px;">
+
+    <h2>Architecture</h2>
+<div class="arch" id="arch"></div>
+
+  </section>
+
+  <!-- RIGHT: setup steps + previews -->
+  <section>
+
+    <h2 style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-dim); margin: 0 0 12px; font-weight: 600;">Setup steps</h2>
+
+    <div class="step-list">
+
+      <div class="step">
+        <div class="step-head">
+          <span class="num">1</span>
+          <span class="title">Sign up for Cloudflare (free tier is enough)</span>
+          <span class="meta">browser</span>
+        </div>
+        <pre>open <span class="k">https://dash.cloudflare.com</span></pre>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <span class="num">2</span>
+          <span class="title">Install Wrangler &amp; log in</span>
+          <span class="meta">terminal</span>
+          <button class="tiny" data-copy="cmd-2">Copy</button>
+        </div>
+<pre id="cmd-2"><span class="c"># in the scribble repo root</span>
+cd worker
+npm install
+npx wrangler login</pre>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <span class="num">3</span>
+          <span class="title">Create the D1 database</span>
+          <span class="meta">copies database_id you paste back into wrangler.toml</span>
+          <button class="tiny" data-copy="cmd-3">Copy</button>
+        </div>
+<pre id="cmd-3">npx wrangler d1 create <span class="s" id="cmd-3-dbname">scribble-artifacts</span></pre>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <span class="num">4</span>
+          <span class="title">Apply migrations</span>
+          <span class="meta">creates the artifacts table</span>
+          <button class="tiny" data-copy="cmd-4">Copy</button>
+        </div>
+<pre id="cmd-4">npx wrangler d1 migrations apply <span class="s" id="cmd-4-dbname">scribble-artifacts</span> --remote</pre>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <span class="num">5</span>
+          <span class="title">Set the UPLOAD_TOKEN secret</span>
+          <span class="meta">paste the token from the left panel</span>
+          <button class="tiny" data-copy="cmd-5">Copy</button>
+        </div>
+<pre id="cmd-5"><span class="c"># the value you pasted: </span><span class="s" id="cmd-5-token">&lt;token&gt;</span>
+npx wrangler secret put UPLOAD_TOKEN</pre>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <span class="num">6</span>
+          <span class="title">Deploy the Worker</span>
+          <span class="meta">prints the live URL on success</span>
+          <button class="tiny" data-copy="cmd-6">Copy</button>
+        </div>
+<pre id="cmd-6">npx wrangler deploy
+<span class="c"># expected output ends with:</span>
+<span class="c">#   Published <span id="cmd-6-name">scribble-deploy</span> (...)</span>
+<span class="c">#     <span class="url" id="cmd-6-url">https://scribble-deploy.&lt;account&gt;.workers.dev</span></span></pre>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <span class="num">7</span>
+          <span class="title">Save your local config</span>
+          <span class="meta">~/.scribble-deploy/config.json</span>
+          <button class="tiny" data-copy="cmd-7">Copy</button>
+        </div>
+<pre id="cmd-7">mkdir -p ~/.scribble-deploy
+cat &gt; ~/.scribble-deploy/config.json &lt;&lt;'JSON'
+<span id="cmd-7-json">{ ... }</span>
+JSON</pre>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <span class="num">8</span>
+          <span class="title">Smoke-test from the scribble repo</span>
+          <span class="meta">should print a shareable URL</span>
+          <button class="tiny" data-copy="cmd-8">Copy</button>
+        </div>
+<pre id="cmd-8"><span class="c"># generate any HTML artifact first via an html-* skill, then:</span>
+/deploy-html</pre>
+      </div>
+
+    </div>
+
+    <h2 style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-dim); margin: 28px 0 12px; font-weight: 600;">File previews</h2>
+
+    <div class="file-block">
+      <div class="file-head">
+        <span class="path">worker/<strong>wrangler.toml</strong></span>
+        <button class="tiny" data-copy="file-wrangler">Copy</button>
+      </div>
+<pre id="file-wrangler"></pre>
+    </div>
+
+    <div class="file-block">
+      <div class="file-head">
+        <span class="path">~/<strong>.scribble-deploy/config.json</strong></span>
+        <button class="tiny" data-copy="file-config">Copy</button>
+      </div>
+<pre id="file-config"></pre>
+    </div>
+
+    <div class="file-block">
+      <div class="file-head">
+        <span class="path">worker/migrations/<strong>0001_init.sql</strong></span>
+        <button class="tiny" data-copy="file-sql">Copy</button>
+      </div>
+<pre id="file-sql">CREATE TABLE IF NOT EXISTS artifacts (
+  id TEXT PRIMARY KEY,
+  content BLOB NOT NULL,
+  content_type TEXT NOT NULL DEFAULT 'text/html',
+  filename TEXT,
+  size_bytes INTEGER NOT NULL,
+  created_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_artifacts_created_at ON artifacts(created_at DESC);</pre>
+    </div>
+
+  </section>
+
+</div>
+
+<footer>
+  throwaway editor &middot; in-memory state only &middot; no persistence &middot; everything you change here disappears on refresh
+</footer>
+
+<script>
+(() => {
+  const DEFAULTS = {
+    worker_name: "scribble-deploy",
+    account_sub: "your-account",
+    db_name: "scribble-artifacts",
+    token: ""
+  };
+
+  const $ = (id) => document.getElementById(id);
+
+  const state = { ...DEFAULTS };
+
+  function genToken() {
+    const buf = new Uint8Array(32);
+    crypto.getRandomValues(buf);
+    return Array.from(buf, (b) => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  function workerUrl(s) {
+    return `https://${s.worker_name}.${s.account_sub}.workers.dev`;
+  }
+
+  function configJson(s) {
+    return JSON.stringify({
+      worker_url: workerUrl(s),
+      token: s.token || "<paste the token you generated>"
+    }, null, 2);
+  }
+
+  function wranglerToml(s) {
+    return `# rename "name" anytime — it becomes <name>.<account>.workers.dev
+name = "${s.worker_name}"
+main = "src/index.ts"
+compatibility_date = "2026-05-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "${s.db_name}"
+database_id = "REPLACE_AFTER_WRANGLER_D1_CREATE"
+`;
+  }
+
+  function archDiagram(s) {
+    const url = workerUrl(s);
+    return `./html-artifacts/foo.html
+        │
+        ▼
+  [/deploy-html] ──▶ POST /upload  (Bearer token)
+        │                                  │
+        │                                  ▼
+        │                          [ Cloudflare Worker ]
+        │                                  │
+        │                                  ▼
+        │                          [ D1 SQLite · BLOB ]
+        │
+        ▼
+   ${url}/a/<id>`;
+  }
+
+  function render() {
+    $("hint-name").textContent = state.worker_name || "<name>";
+    $("cmd-3-dbname").textContent = state.db_name;
+    $("cmd-4-dbname").textContent = state.db_name;
+    $("cmd-5-token").textContent = state.token || "<click ↻ Generate on the left>";
+    $("cmd-6-name").textContent = state.worker_name;
+    $("cmd-6-url").textContent = workerUrl(state);
+    $("cmd-7-json").textContent = configJson(state);
+    $("file-wrangler").textContent = wranglerToml(state);
+    $("file-config").textContent = configJson(state);
+    $("arch").textContent = archDiagram(state);
+  }
+
+  function bindInput(id, key) {
+    const el = $(id);
+    el.value = state[key];
+    el.addEventListener("input", () => {
+      state[key] = el.value.trim();
+      render();
+    });
+  }
+
+  function flash(btn) {
+    btn.classList.add("copied");
+    const orig = btn.textContent;
+    btn.textContent = "✓ Copied";
+    setTimeout(() => {
+      btn.classList.remove("copied");
+      btn.textContent = orig;
+    }, 1200);
+  }
+
+  async function copy(text, btn) {
+    try {
+      await navigator.clipboard.writeText(text);
+      flash(btn);
+    } catch (e) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); flash(btn); } catch (_) {}
+      document.body.removeChild(ta);
+    }
+  }
+
+  function fullSetup() {
+    return [
+      "# === deploy-html: one-time Cloudflare setup ===",
+      "",
+      "# 1. sign up at https://dash.cloudflare.com (free tier is enough)",
+      "",
+      "# 2. install wrangler and log in",
+      "cd worker",
+      "npm install",
+      "npx wrangler login",
+      "",
+      `# 3. create D1`,
+      `npx wrangler d1 create ${state.db_name}`,
+      "# copy the printed database_id into worker/wrangler.toml",
+      "",
+      "# 4. apply migrations",
+      `npx wrangler d1 migrations apply ${state.db_name} --remote`,
+      "",
+      "# 5. set the upload token secret",
+      `# token: ${state.token || "<generate one in the builder>"}`,
+      "npx wrangler secret put UPLOAD_TOKEN",
+      "",
+      "# 6. deploy",
+      "npx wrangler deploy",
+      `# expect: ${workerUrl(state)}`,
+      "",
+      "# 7. save local config",
+      "mkdir -p ~/.scribble-deploy",
+      "cat > ~/.scribble-deploy/config.json <<'JSON'",
+      configJson(state),
+      "JSON",
+      "",
+      "# 8. smoke-test (generate an html-* artifact first)",
+      "/deploy-html"
+    ].join("\n");
+  }
+
+  // wire inputs
+  bindInput("worker_name", "worker_name");
+  bindInput("account_sub", "account_sub");
+  bindInput("db_name", "db_name");
+  bindInput("token", "token");
+
+  // token generator
+  $("gen-token").addEventListener("click", () => {
+    state.token = genToken();
+    $("token").value = state.token;
+    render();
+  });
+
+  // copy buttons (data-copy points at the id of a <pre>)
+  document.querySelectorAll("button[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = document.getElementById(btn.getAttribute("data-copy"));
+      if (!target) return;
+      copy(target.innerText, btn);
+    });
+  });
+
+  $("copy-config").addEventListener("click", (e) => copy(configJson(state), e.currentTarget));
+  $("copy-wrangler").addEventListener("click", (e) => copy(wranglerToml(state), e.currentTarget));
+  $("copy-all").addEventListener("click", (e) => copy(fullSetup(), e.currentTarget));
+
+  $("reset").addEventListener("click", () => {
+    Object.assign(state, DEFAULTS);
+    $("worker_name").value = state.worker_name;
+    $("account_sub").value = state.account_sub;
+    $("db_name").value = state.db_name;
+    $("token").value = state.token;
+    render();
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
