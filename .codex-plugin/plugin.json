@@ -1,13 +1,13 @@
 {
-  "name": "research-artifacts",
+  "name": "scribble",
   "version": "0.1.0",
   "description": "Research, source synthesis, tool evaluation, and HTML discovery workflows for agent sessions.",
   "author": {
     "name": "Martin Patino",
     "email": "mpatino117@gmail.com"
   },
-  "homepage": "https://github.com/mpatino117/research-artifacts",
-  "repository": "https://github.com/mpatino117/research-artifacts",
+  "homepage": "https://github.com/mpatino117/scribble",
+  "repository": "https://github.com/mpatino117/scribble",
   "license": "MIT",
   "keywords": [
     "research",
@@ -19,9 +19,9 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Research Artifacts",
+    "displayName": "Scribble",
     "shortDescription": "Research workflows and HTML discovery artifacts",
-    "longDescription": "Use Research Artifacts for sourced research, tool evaluation, source synthesis, and single-file HTML discovery reports when plain chat is too flat.",
+    "longDescription": "Use Scribble for sourced research, tool evaluation, source synthesis, and single-file HTML discovery reports when plain chat is too flat.",
     "developerName": "Martin Patino",
     "category": "Productivity",
     "capabilities": [
@@ -30,7 +30,7 @@
       "Write"
     ],
     "defaultPrompt": [
-      "Use Research Artifacts to research this repo and make an HTML discovery report.",
+      "Use Scribble to research this repo and make an HTML discovery report.",
       "Evaluate these tools for my stack.",
       "Synthesize these sources into a concise decision memo."
     ],

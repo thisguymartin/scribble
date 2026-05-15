@@ -1,5 +1,5 @@
 {
-  "name": "research-artifacts",
+  "name": "scribble",
   "owner": {
     "name": "Martin Patino",
     "email": "mpatino117@gmail.com"
@@ -8,7 +8,7 @@
   "version": "0.1.0",
   "plugins": [
     {
-      "name": "research-artifacts",
+      "name": "scribble",
       "source": "./",
       "description": "Research, source synthesis, tool evaluation, and HTML discovery workflows.",
       "version": "0.1.0",
@@ -16,8 +16,8 @@
         "name": "Martin Patino",
         "email": "mpatino117@gmail.com"
       },
-      "homepage": "https://github.com/mpatino117/research-artifacts",
-      "repository": "https://github.com/mpatino117/research-artifacts",
+      "homepage": "https://github.com/mpatino117/scribble",
+      "repository": "https://github.com/mpatino117/scribble",
       "license": "MIT",
       "keywords": [
         "research",

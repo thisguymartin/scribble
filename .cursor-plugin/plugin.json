@@ -1,13 +1,13 @@
 {
-  "name": "research-artifacts",
+  "name": "scribble",
   "version": "0.1.0",
-  "displayName": "Research Artifacts",
+  "displayName": "Scribble",
   "description": "Research, source synthesis, tool evaluation, and HTML discovery workflows for agent sessions.",
   "author": {
     "name": "Martin Patino",
     "email": "mpatino117@gmail.com"
   },
-  "homepage": "https://github.com/mpatino117/research-artifacts",
-  "repository": "https://github.com/mpatino117/research-artifacts",
+  "homepage": "https://github.com/mpatino117/scribble",
+  "repository": "https://github.com/mpatino117/scribble",
   "license": "MIT"
 }

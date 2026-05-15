@@ -1,6 +1,6 @@
-# Research Artifacts
+# Scribble
 
-Personal research and discovery skills for agent workflows.
+Personal research and discovery skills for agent workflows. Quick HTML sketches to debug, explore, and surface patterns.
 
 This repo is skills-first. The main install path is the Vercel `skills` CLI because it can install the same `skills/` directory into Codex, Claude Code, Cursor, Gemini CLI, OpenCode, and other agents.
 
@@ -9,32 +9,32 @@ This repo is skills-first. The main install path is the Vercel `skills` CLI beca
 From `/Users/thisguymartin/personal-workspace`:
 
 ```bash
-npx skills add ./research-artifacts --list
-npx skills add ./research-artifacts --all -g
+npx skills add ./scribble --list
+npx skills add ./scribble --all -g
 ```
 
 Install into only the current project instead of globally:
 
 ```bash
-npx skills add ./research-artifacts --all
+npx skills add ./scribble --all
 ```
 
 Install globally for Codex only:
 
 ```bash
-npx skills add ./research-artifacts -a codex -g
+npx skills add ./scribble -a codex -g
 ```
 
 After publishing the repo publicly:
 
 ```bash
-npx skills add mpatino117/research-artifacts --all -g
+npx skills add mpatino117/scribble --all -g
 ```
 
 To avoid CLI telemetry while installing:
 
 ```bash
-DISABLE_TELEMETRY=1 npx skills add ./research-artifacts --all -g
+DISABLE_TELEMETRY=1 npx skills add ./scribble --all -g
 ```
 
 ## Skills
@@ -103,16 +103,16 @@ The repo also includes plugin metadata for Codex and Claude Code.
 Codex local marketplace:
 
 ```bash
-codex plugin marketplace add /Users/thisguymartin/personal-workspace/research-artifacts
+codex plugin marketplace add /Users/thisguymartin/personal-workspace/scribble
 ```
 
-Then open `/plugins`, choose `Research Artifacts`, and install it.
+Then open `/plugins`, choose `Scribble`, and install it.
 
 Claude Code local marketplace:
 
 ```text
-/plugin marketplace add /Users/thisguymartin/personal-workspace/research-artifacts
-/plugin install research-artifacts@research-artifacts
+/plugin marketplace add /Users/thisguymartin/personal-workspace/scribble
+/plugin install scribble@scribble
 ```
 
 ## References

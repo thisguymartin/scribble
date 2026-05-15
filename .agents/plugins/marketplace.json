@@ -1,11 +1,11 @@
 {
-  "name": "research-artifacts",
+  "name": "scribble",
   "interface": {
-    "displayName": "Research Artifacts"
+    "displayName": "Scribble"
   },
   "plugins": [
     {
-      "name": "research-artifacts",
+      "name": "scribble",
       "source": {
         "source": "local",
         "path": "./"

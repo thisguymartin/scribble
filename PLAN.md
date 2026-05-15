@@ -1,4 +1,4 @@
-# Research Artifacts Remaining Work
+# Scribble Remaining Work
 
 ## Done In Initial Scaffold
 
@@ -9,12 +9,12 @@
 
 ## Still To Do
 
-- Validate `npx skills add ./research-artifacts --all -g` across all installed agents on this machine.
+- Validate `npx skills add ./scribble --all -g` across all installed agents on this machine.
 - Validate Codex marketplace install through `/plugins`.
 - Validate Claude Code marketplace install through `/plugin`.
 - Check Cursor, Gemini CLI, and OpenCode current plugin metadata before calling those surfaces stable.
 - Add logo and screenshots before making the repo public.
-- Publish the GitHub repo as `mpatino117/research-artifacts` when the local install path is reliable.
+- Publish the GitHub repo as `mpatino117/scribble` when the local install path is reliable.
 - Add release notes and bump plugin versions when the first public release is ready.
 
 ## Future Skills
@@ -32,7 +32,7 @@ python3 -m json.tool .agents/plugins/marketplace.json
 python3 -m json.tool .claude-plugin/plugin.json
 python3 -m json.tool .claude-plugin/marketplace.json
 python3 -m json.tool .cursor-plugin/plugin.json
-npx skills add ./research-artifacts --list
-npx skills add ./research-artifacts -a codex -g
+npx skills add ./scribble --list
+npx skills add ./scribble -a codex -g
 npx skills list -a codex
 ```
