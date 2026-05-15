@@ -16,7 +16,7 @@ Use this before recommending a tool or technology.
 - Fit with the user's stack, especially Go and TypeScript unless another stack is specified.
 - Pricing, free tier limits, and expected monthly cost.
 - Deprecations, breaking changes, migration risk, and lock-in.
-- Available MCP resources or templates when evaluating local tools, integrations, or internal context. Keep this read-only unless the user explicitly asks for mutation.
+- Available MCP resources or templates when evaluating local tools, integrations, or internal context. Treat MCP usage as read-only discovery unless the user explicitly asks to create, update, or delete.
 - Source origin labels for important claims: `local repo`, `user-provided`, `read-only MCP`, `web`, `model inference`, or `assumption`.
 
 ## Recommendation Shape
@@ -39,6 +39,7 @@ If the output should be visual or shareable, create sections that make tradeoffs
 - Decision scorecard with clear weights when the user provides priorities.
 - Pros, cons, migration steps, and rollback concerns.
 - Source ledger that links docs, repos, pricing pages, issues, benchmarks, or MCP queries.
+- For larger visual artifacts, see `../research-html-discovery/references/artifact-patterns.md` for shared section types, source ledger labels, and handoff format.
 
 ## Defaults
 
@@ -46,4 +47,10 @@ If the output should be visual or shareable, create sections that make tradeoffs
 - Do not assume a deployment target. Ask or state the assumption when infrastructure choice matters.
 - Do not suggest sending real customer data to third-party AI services.
 - Clearly flag anything based on inference instead of verified sources.
-- Ask for missing resources only when they materially affect the recommendation.
+- After the first source pass, ask for missing resources only when they would materially improve the artifact or change the recommendation. State what each ask unlocks.
+
+## When Not To Use
+
+- The user has already chosen the tool and just needs help using it.
+- Trivial library swaps inside the same ecosystem with no comparison required.
+- The question is about implementation or migration mechanics, not selection — pair with `source-synthesis` for handoff structure instead.

@@ -10,6 +10,18 @@ Use this only when a research or planning answer should become a larger visual a
 - Decision view: pros, cons, tradeoffs, risks, assumptions, and open questions.
 - Action plan: next steps, owner or agent handoff, validation path, and useful follow-up prompts.
 
+## Before Emitting
+
+Run this checklist before finalizing any larger artifact:
+
+- [ ] Source ledger has origin label and freshness on every non-trivial claim.
+- [ ] Facts separated from inference and assumptions.
+- [ ] At least one visual model chosen (flow, table, timeline, scorecard, or map).
+- [ ] Risks, contradictions, and open questions surfaced — not buried.
+- [ ] Next step, decision, or handoff is explicit.
+- [ ] No real customer data — synthetic only.
+- [ ] Confidence level stated for recommendations and any extrapolation.
+
 ## Source Ledger Labels
 
 - `local repo`: code, docs, git history, tests, config, generated files.

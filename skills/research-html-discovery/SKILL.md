@@ -12,7 +12,7 @@ Use this for sourced discovery and visual planning reports.
 ## Source Policy
 
 - Default sources: local codebase, git history, and files the user provided.
-- Check available MCP resources and resource templates when they may contain useful context. Treat MCP usage as read-only discovery unless the user explicitly asks to create, update, or delete something.
+- Check available MCP resources and resource templates when they may contain useful context. Treat MCP usage as read-only discovery unless the user explicitly asks to create, update, or delete.
 - Web, Linear, Slack, Datadog, Mixpanel, Notion, and other non-local sources are opt-in unless the user asks for latest/current market, tool, API, or technical guidance.
 - Never include real customer data in generated examples or HTML. Use synthetic data.
 - Cite every non-trivial claim with file paths, URLs, issue IDs, PRs, or tool query context.
@@ -22,8 +22,14 @@ Use this for sourced discovery and visual planning reports.
 ## Clarification And Resources
 
 - Explore local and available read-only sources before asking questions.
-- Ask for resources only when they would materially improve the artifact: maps, graphics, screenshots, datasets, pricing inputs, brand assets, examples, customer notes, or architecture docs.
-- State why the missing resource matters and what part of the artifact it would improve.
+- After the first source pass, ask for missing resources only when they would materially improve the artifact or change the recommendation. State what each ask unlocks.
+- Good asks include maps, graphics, screenshots, datasets, pricing inputs, brand assets, examples, customer notes, or architecture docs.
+
+## When Not To Use
+
+- One-line answers, commit messages, PR bodies, or anything under ~30 lines — Markdown is enough.
+- Quick lookups where the user wants a single fact, not a sourced report.
+- Tasks already owned by `source-synthesis` (combining provided sources) or `tool-evaluation` (picking between options).
 
 ## Output Choice
 
