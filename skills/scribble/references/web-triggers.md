@@ -1,6 +1,6 @@
 # Web Triggers
 
-Canonical list of phrases and flags that open the **web / external-source gate** in `html-effectiveness`. The skill defaults to closed: no `WebSearch`, no `WebFetch`, no external MCP calls unless one of the triggers below is present in the user's prompt for this run.
+Canonical list of phrases and flags that open the **web / external-source gate** in `scribble`. The skill defaults to closed: no `WebSearch`, no `WebFetch`, no external MCP calls unless one of the triggers below is present in the user's prompt for this run.
 
 Update this file when adding new triggers. Do not edit `SKILL.md`.
 
@@ -65,7 +65,7 @@ These look like triggers but are not:
 
 ## Closing the Gate
 
-The gate is per-run. It does not persist across `html-effectiveness` invocations. A user who opened the gate for one artifact must re-trigger it for the next one.
+The gate is per-run. It does not persist across `scribble` invocations. A user who opened the gate for one artifact must re-trigger it for the next one.
 
 ## Adding New Triggers
 

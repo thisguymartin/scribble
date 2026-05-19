@@ -1,11 +1,11 @@
 ---
-name: research-html-discovery
+name: scribble-research
 description: Use when researching a repo, workflow, product idea, market, pricing, UI plan, or technical topic where the result should be sourced, visual, shareable, revisable, or saved as an HTML artifact.
 metadata:
-  commands: research, research-html, discovery
+  commands: scribble-source, scribble-research, scribble-discover
 ---
 
-# Research HTML Discovery
+# Scribble Research
 
 Use this for sourced discovery and visual planning reports.
 

@@ -1,8 +1,20 @@
 # Artifact Types
 
-Per-type recipes for the nine HTML artifact shapes referenced by the `html-effectiveness` skill. Load only the row that matches the chosen type; do not load the full file unless the type is ambiguous.
+Per-type recipes for the nine HTML artifact shapes referenced by the `scribble` skill. Load only the row that matches the chosen type; do not load the full file unless the type is ambiguous.
 
 Every type follows the global rules from the parent `SKILL.md` — single self-contained HTML file, inline CSS/JS, `./html-artifacts/<topic>-<YYYY-MM-DD>.html`, visible Sources section, synthetic data only, no persistence, no backend.
+
+## Reasoning Scaffold (long-form only)
+
+Types `report`, `research`, `plan`, and `walkthrough` must include three sections between the header/TL;DR and the body:
+
+- **Problem breakdown** — 2-4 bullets framing what is broken, unclear, or at stake.
+- **Approach** — one short paragraph stating the recommended path, plus a flow / timeline SVG when the change is non-trivial.
+- **Alternatives** — 2-3 paths considered and rejected, each rendered as a `<dl>` row: name (italic `<dt>`) + one-line "why not" (`<dd>`).
+
+Types `compare`, `tool`, `design`, `diagram`, `deck` are exempt — their structure already serves those purposes.
+
+See `themes.md` for the visual treatment of these blocks in the `editorial` theme.
 
 ## compare
 
@@ -91,7 +103,7 @@ Every type follows the global rules from the parent `SKILL.md` — single self-c
 - Annotated code snippets for the 2-4 most important slices.
 - Risk table: risk, likelihood, mitigation.
 - Decision points / open questions.
-- Handoff section — see `Agent Handoff` in `../../research-html-discovery/references/artifact-patterns.md`.
+- Handoff section — see `Agent Handoff` in `../../scribble-research/references/artifact-patterns.md`.
 - Sources section.
 
 **Visual elements:**

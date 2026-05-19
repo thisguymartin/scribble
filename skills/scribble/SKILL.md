@@ -1,11 +1,11 @@
 ---
-name: html-effectiveness
+name: scribble
 description: Use when a user asks for an HTML artifact, visual spec, interactive explainer, PR or code walkthrough, design comparison, prototype, deck, report, custom editor, or any shareable, re-readable output that would be too flat as Markdown.
 metadata:
-  commands: html
+  commands: scribble
 ---
 
-# HTML Effectiveness
+# Scribble
 
 Use one self-contained `.html` file when layout, visuals, interaction, or shareability will make the work easier to review than Markdown.
 
@@ -41,6 +41,30 @@ Nine artifact types. Pick from the user's prompt; ask one disambiguating questio
 
 Inferred default when nothing pins the type: `research`. Confirm the inferred choice in one sentence before generating.
 
+## Routing
+
+The skill is the router. `commands/scribble.md` is the single entry point — it always lands here, regardless of the artifact shape the user wants.
+
+1. **Auto-pin from keywords.** If the user prompt already names the shape, skip the question and confirm the pick in one sentence. Matches:
+   - "compare", "side-by-side", "N options", "approaches" → `compare`
+   - "walkthrough", "explain this PR", "annotate the diff", "review this change" → `walkthrough`
+   - "drag to reorder", "tune with sliders", "annotate then export", "throwaway tool" → `tool`
+   - "research", "deep dive", "synthesize", "explain how X works" → `research`
+   - "status update", "weekly recap", "post-mortem", "incident", "migration report" → `report`
+   - "implementation plan", "spec", "roadmap", "milestones" → `plan`
+   - "deck", "slides", "presentation" → `deck`
+   - "diagram", "flowchart", "architecture diagram" → `diagram`
+   - "prototype", "tune the easing", "live preview" → `design`
+2. **Otherwise ask one bucket question.** Five buckets cover the nine types:
+   1. Compare options → `compare`
+   2. Walkthrough code → `walkthrough`
+   3. Interactive tool → `tool`
+   4. Research / report / plan → disambiguate with one follow-up
+   5. Other (diagram / deck / design prototype) → disambiguate with one follow-up
+3. **Load only the matching row** from `references/artifact-types.md`. Do not read the full file.
+4. **Pick a theme** per `references/themes.md` selection rules. Default `utilitarian`. Default `editorial` for `report` / `research` / `plan` / `walkthrough` when audience contains leadership / exec / CTO / CEO / board / investor. Honor `--theme editorial|utilitarian|minimal` or explicit user phrasing ("make it pretty" → editorial; "keep it plain" → utilitarian).
+5. **One-line confirmation** before building: state the picked type, theme, and audience. Example: `Building report · editorial · audience CTO.`
+
 ## Build Workflow
 
 1. Define the job: who will read it, what decision it supports, and what source set is being used.
@@ -48,10 +72,12 @@ Inferred default when nothing pins the type: `research`. Confirm the inferred ch
 3. Write a single valid HTML5 file under `./html-artifacts/<topic>-<YYYY-MM-DD>.html`.
 4. Use inline CSS, inline JS, and inline SVG. No build step.
 5. Put the main answer above the fold: conclusion, confidence, source coverage, and next action.
-6. Make the body dense and scannable: tables, timelines, diagrams, tabs, scorecards, and controls beat long prose.
-7. Add a visible source ledger and separate facts from inference, assumptions, gaps, and risks.
-8. For custom editors, always include an export button that returns the edited state as Markdown, JSON, diff, or a next-agent prompt.
-9. Validate before final response: file exists, no `TODO` placeholders, title matches topic, source ledger is visible, and interactions have a no-JS fallback or clear static state.
+6. For long-form types (`report`, `research`, `plan`, `walkthrough`), include **Problem breakdown → Approach → Alternatives** between the header/TL;DR and the body. See `references/artifact-types.md` for the scaffold spec.
+7. Apply the picked theme's tokens and layout patterns from `references/themes.md` inline at the top of the `<style>` block. Do not mix themes.
+8. Make the body dense and scannable: tables, timelines, diagrams, tabs, scorecards, and controls beat long prose.
+9. Add a visible source ledger and separate facts from inference, assumptions, gaps, and risks.
+10. For custom editors, always include an export button that returns the edited state as Markdown, JSON, diff, or a next-agent prompt.
+11. Validate before final response: file exists, no `TODO` placeholders, title matches topic, source ledger is visible, and interactions have a no-JS fallback or clear static state.
 
 ## Visual Rules
 
@@ -74,7 +100,8 @@ Return the artifact path, what sources were used, any skipped external lookup, a
 
 ## References
 
-- `references/artifact-types.md` — per-type recipe sheet covering the nine artifact shapes.
+- `references/artifact-types.md` — per-type recipe sheet covering the nine artifact shapes, plus the long-form Problem / Approach / Alternatives scaffold.
+- `references/themes.md` — `editorial`, `utilitarian`, `minimal` theme tokens, layout rules, and selection logic.
 - `references/web-triggers.md` — canonical opt-in trigger list. Update this file when adding new triggers, not `SKILL.md`.
 - `references/caveman-prompt-template.md` — sub-agent prompt skeleton and before/after sample.
-- `../research-html-discovery/references/artifact-patterns.md` — shared section types, source ledger labels, `Before Emitting` checklist, agent handoff format.
+- `../scribble-research/references/artifact-patterns.md` — shared section types, source ledger labels, `Before Emitting` checklist, agent handoff format.

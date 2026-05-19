@@ -39,7 +39,7 @@ If the output should be visual or shareable, create sections that make tradeoffs
 - Decision scorecard with clear weights when the user provides priorities.
 - Pros, cons, migration steps, and rollback concerns.
 - Source ledger that links docs, repos, pricing pages, issues, benchmarks, or MCP queries.
-- For larger visual artifacts, see `../research-html-discovery/references/artifact-patterns.md` for shared section types, source ledger labels, and handoff format.
+- For larger visual artifacts, see `../scribble-research/references/artifact-patterns.md` for shared section types, source ledger labels, and handoff format.
 - If the official [caveman](https://github.com/JuliusBrussee/caveman) skill is installed, write tradeoff and recommendation copy in caveman `lite` mode — drop marketing voice, keep readable sentences.
 
 ## Defaults

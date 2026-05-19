@@ -39,8 +39,8 @@ DISABLE_TELEMETRY=1 npx skills add ./scribble --all -g
 
 ## Skills
 
-- `html-effectiveness` - broad single-file HTML artifacts when Markdown is too flat.
-- `research-html-discovery` - research reports and HTML discovery artifacts.
+- `scribble` - broad single-file HTML artifacts when Markdown is too flat.
+- `scribble-research` - research reports and HTML discovery artifacts.
 - `tool-evaluation` - maintenance, license, adoption, cost, and stack-fit reviews.
 - `source-synthesis` - compact sourced summaries that separate facts from inference.
 
@@ -52,8 +52,8 @@ How a user request routes through the skills and where the optional [caveman](ht
 flowchart TD
     U([User request]) --> R{What kind of work?}
 
-    R -->|Shareable or visual output,<br/>plan, PR review, explainer,<br/>prototype, report, editor| HE[html-effectiveness]
-    R -->|Research repo, market,<br/>UI plan, technical topic| RHD[research-html-discovery]
+    R -->|Shareable or visual output,<br/>plan, PR review, explainer,<br/>prototype, report, editor| HE[scribble]
+    R -->|Research repo, market,<br/>UI plan, technical topic| RHD[scribble-research]
     R -->|Combine sources into a memo<br/>or planning handoff| SS[source-synthesis]
     R -->|Pick between libraries,<br/>APIs, SaaS, MCPs| TE[tool-evaluation]
 
@@ -84,7 +84,7 @@ flowchart TD
     class CMLITE,CMFULL caveman;
 ```
 
-Read it as: `html-effectiveness` is the broad "make this readable as HTML" path. The other skills stay narrower helpers for research, synthesis, and tool evaluation. Local sources are the default; web lookup only happens when requested or explicitly approved. Output is either an HTML artifact for humans or a handoff prompt for an agent. If caveman is installed globally, those outputs route through `lite` or `full` mode for token savings and plain-English copy.
+Read it as: `scribble` is the broad "make this readable as HTML" path. The other skills stay narrower helpers for research, synthesis, and tool evaluation. Local sources are the default; web lookup only happens when requested or explicitly approved. Output is either an HTML artifact for humans or a handoff prompt for an agent. If caveman is installed globally, those outputs route through `lite` or `full` mode for token savings and plain-English copy.
 
 ## Recommended Companion Skill — caveman
 

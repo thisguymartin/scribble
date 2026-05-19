@@ -28,7 +28,7 @@ Use this when the user provides or requests multiple sources and wants the usefu
 
 - The user wants a raw excerpt, a single quote, or a verbatim file dump — synthesis adds friction there.
 - Pure tool or library comparison — defer to `tool-evaluation`.
-- Greenfield discovery with no sources yet provided — defer to `research-html-discovery`.
+- Greenfield discovery with no sources yet provided — defer to `scribble-research`.
 
 ## Output
 
@@ -38,7 +38,7 @@ Use this when the user provides or requests multiple sources and wants the usefu
 - Add confidence levels when sources vary in quality or recency.
 - Keep direct quotes short and only when wording matters.
 - Make source origin visible when it affects trust or freshness.
-- For larger visual artifacts, see `../research-html-discovery/references/artifact-patterns.md` for shared section types, source ledger labels, and handoff format.
+- For larger visual artifacts, see `../scribble-research/references/artifact-patterns.md` for shared section types, source ledger labels, and handoff format.
 
 ## Decision Memo Format
 

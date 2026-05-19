@@ -1,6 +1,6 @@
 # Caveman Prompt Template
 
-How to write sub-agent prompts when `html-effectiveness` delegates to `Agent` / `Explore` / `general-purpose` / `Plan` / specialized agents.
+How to write sub-agent prompts when `scribble` delegates to `Agent` / `Explore` / `general-purpose` / `Plan` / specialized agents.
 
 User-facing HTML artifact body copy stays in plain English (or caveman `lite` mode when the official caveman skill is installed globally). **Sub-agent prompts** issued internally are compressed in caveman full mode. Cuts roughly 60-75% of inter-agent tokens with no loss of technical content.
 
